@@ -17,6 +17,13 @@ export const store = createStore({
         todo.text = payload.text; 
       }
     },
+    MARK_COMPLETE(state, payload) {
+      const todo = state.todos.find((todo) => todo.id === payload.id);
+      if (todo) {
+        console.log('qwe'+payload.completed)
+        todo.completed = payload.completed; 
+      }
+    }
   },
   actions: {
     addTodo({ commit }, todoText) {
@@ -27,10 +34,13 @@ export const store = createStore({
       commit('REMOVE_TODO', todoId);
     },
     editTodo({ commit }, payload) {
-        console.log('here', payload, 'fhvc', commit);
+       
         
       commit('EDIT_TODO', payload);
     },
+    markComplete({ commit }, payload) {
+      commit('MARK_COMPLETE', payload)
+    }
   },
   getters: {
     allTodos(state) {
