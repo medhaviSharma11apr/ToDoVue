@@ -1,6 +1,6 @@
 <template>
 
-  <v-list >
+  <v-list v-if="todayTodos.length!=0">
     <div>
      <span>Today's Task</span>
         <v-list-item
@@ -31,7 +31,7 @@
     
   </v-list>
 
-   <v-list >
+   <v-list v-if="tommorrowTodo.length!=0" >
     <div>
      <span>Tommorow's Task</span>
         <v-list-item
@@ -63,7 +63,7 @@
   </v-list>
 
 
-  <v-list >
+  <v-list v-if="futureTodo.length!=0">
     <div>
      <span>Future's Task</span>
         <v-list-item
