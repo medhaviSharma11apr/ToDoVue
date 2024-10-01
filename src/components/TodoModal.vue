@@ -1,21 +1,19 @@
 
 <template>
   <v-dialog
-    
     v-model="editModal"
     max-width="500"
     @update:modelValue="$emit('update:dialog', $event)"
-  
+    persistent
   >
     <v-card>
       <v-card-title class="text-h5">Edit Task</v-card-title>
-
       <v-text-field
         v-model="localModalData"
         label="Input Data"
         placeholder="Enter some text"
         @keyup.enter="emitSave"
-        
+     
       ></v-text-field>
 
       <v-card-actions>
@@ -68,9 +66,9 @@ export default {
     watch(() => props.dialog, (newValue) => {
       if (newValue) {
         editModal.value = newValue;
-        
+
       }
-    })
+    });
 
     const emitSave = () => {
 
@@ -92,6 +90,7 @@ export default {
      localModalData.value =props.modalData
 
     }
+    
    
 
     return { localModalData, emitSave, editModal , closeModal };

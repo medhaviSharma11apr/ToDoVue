@@ -12,6 +12,9 @@
         <v-col cols="10">
                 <TodoList
                   :todos="todos"
+                  :todayTodos="todayTodos"
+                  :tommorrowTodo="tommorrowTodo"
+                  :futureTodo="futureTodo"
                   @removeTodo="removeTodo2"
                   @editTodo="openModal" 
                   @markComplete="markComplete2"
@@ -60,40 +63,44 @@ export default {
     
     
     function openModal(todo) {
-      console.log('openModal');
-     
       modalData.value = todo.text;
-      console.log("1"+dialog.value);
       modalId.value = todo.id;
-
       dialog.value = true;
-
-      console.log("2" + dialog.value);
       isCompleted.value = todo.isCompleted;
-
-
-    }
+}
 
     return { dialog, modalData, modalId, openModal , isCompleted};
   },
   computed: {
-    ...mapGetters(['allTodos']),
+    ...mapGetters(['allTodos','todayTodos',]),
     todos() {
-      return this.$store.getters.allTodos;  
+      return this.$store.getters.allTodosFilter;  
     },
+    todayTodos() {
+      return this.$store.getters.todayTodos;
+    },
+    tommorrowTodo() {
+      return this.$store.getters.tommorrowTodo;
+    },
+    futureTodo() { 
+        return this.$store.getters.futureTodo;
+    }
+    
+    
+   
   },
   methods: {
     ...mapActions(['addTodo', 'removeTodo', 'editTodo', 'markComplete']),
     
     handleAddTodo(newTodo) {
-      if (newTodo.trim() !== '') {
-        this.addTodo(newTodo);
+      console.log('new Todo', newTodo);
+      if (newTodo.inputText.trim() !== '') {
+        console.log("main" + newTodo.inputText);
+        this.addTodo({inputText: newTodo.inputText, date:newTodo.date});
       }
     },
     markComplete2(todoId, isCompleted) {
-      console.log('ToDo' + todoId);
-      console.log('ToDo' + isCompleted);
-      
+     
        const todo = this.todos.find((todo) => todo.id === todoId);
       if (todo) {
         todo.isCompleted = isCompleted; // Update isCompleted based on emitted value
