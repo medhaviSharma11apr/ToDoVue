@@ -1,15 +1,16 @@
 <template>
-  <v-app>
-    <v-container>
+  <v-app class="">
+    <v-container class="m-5">
       <v-row>
         <v-col cols="12">
-          <h1 class="text-center">Vuetify Todo App with Vuex</h1>
+          <h1 class="text-center">ADD TODO</h1>
           <!-- Input form to add a new todo -->
           <TodoInput @addTodo="handleAddTodo" />
         </v-col>
 
         <!-- Todo List -->
-        <v-col cols="10">
+        
+        <v-col  >
                 <TodoList
                   :todos="todos"
                   :todayTodos="todayTodos"
